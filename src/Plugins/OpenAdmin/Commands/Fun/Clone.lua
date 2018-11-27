@@ -36,7 +36,7 @@ module.PermissionsNeeded = {} -- or just a string
 
 module.ArgumentSchema = {
 	{
-		["Type"] = "Target",
+		["Type"] = "String",
 		["Name"] = "player",
 		["Arguments"] = {
 			["DisallowSpecial"] = false, -- Should we disallow "me"
