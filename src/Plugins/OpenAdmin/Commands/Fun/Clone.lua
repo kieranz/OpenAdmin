@@ -40,15 +40,43 @@ module.ArgumentSchema = {
 		["Name"] = "player",
 		["Arguments"] = {
 			["DisallowSpecial"] = false, -- Should we disallow "me"
-			["IgnoreSelf"] = true, -- If the user passes in themselves as an argument (their name, their userid, or "me" [if DisallowSpecial is false]) should we treat it as an invalid target?
+			["IgnoreSelf"] = false, -- If the user passes in themselves as an argument (their name, their userid, or "me" [if DisallowSpecial is false]) should we treat it as an invalid target?
 			["IgnoreGroupOrder"] = false -- Should we allow users to target anyone? (false, allow targeting anyone)
 		}
 	}
 }
 
+local function getPlayers(pl, string)
+   if string:lower() == "" then
+      return
+   end
+   if string:lower( ) == "all" then
+      string = ""
+   end
+   if pl and string:lower() == "me" then
+      string = pl.Name
+   end
+   local localPlayers = {}
+   for i,v in pairs(game.Players:GetPlayers()) do
+      if v:lower():sub(1, string:len()) then
+         table.insert(localPlayers, v)
+      end
+   end
+   return localPlayers
+end 
+
+
 function module:Run(sender, args)
 	local target = args[1]
-  
+	target = sender:getPlayers(target)
+	
+	for _, player in pairs(target) do
+	    if player.Character then
+	        local character = player.Character or player.CharacterAdded:Wait()
+	        local cloned = character:Clone()
+	    end
+	end
+	
 	return true
 end
 
