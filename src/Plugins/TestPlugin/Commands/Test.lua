@@ -1,10 +1,10 @@
 local module = {}
 
-module.CommandName = "test"
-module.DisplayName = "Test"
-module.Description = "A test command."
+module.CommandName = "damage"
+module.DisplayName = "Damage"
+module.Description = "Takes damage."
 
-module.Category = "Test Category"
+module.Category = "Fun"
 
 module.PermissionsNeeded = {
 	
@@ -63,7 +63,7 @@ function module:Run(sender, args)
 	if char and char:FindFirstChild("Humanoid") and char:FindFirstChild("Humanoid").Health > 0 then
 		char:FindFirstChild("Humanoid").Health = char:FindFirstChild("Humanoid").Health - dmg
 		
-		sender:TellWithPrefix("Test")
+		sender:TellWithPrefix("Took damage on " .. Target.Name)
 	end	
 	
 	return true
