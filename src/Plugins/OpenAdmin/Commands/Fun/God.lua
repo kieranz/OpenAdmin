@@ -73,7 +73,11 @@ function module:Run(sender, args)
 	for _, player in pairs(target) do
 	    if player.Character then
 	        local character = player.Character or player.CharacterAdded:Wait()
-	        local cloned = character:Clone()
+	        if character:FindFirstChild("Humanoid") then
+		   local Humanoid = character:FindFirstChild("Humanoid")
+		   Humanoid.MaxHealth = math.huge
+		   Humanoid.Health = math.huge
+		end
 	    end
 	end
 	
